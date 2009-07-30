@@ -7,6 +7,7 @@
 #	include <vector>
 
 #	include <glibmm/ustring.h>
+#	include <gtkmm/textbuffer.h>
 
 #	include <boost/regex.hpp>
 
@@ -58,7 +59,7 @@ namespace warg
 			{
 				typedef Str									type ;
 				typedef typename type::iterator				iterator ;
-				typedef typename type::value_type * const	const_iterator ;
+				typedef typename type::iterator::value_type * const	const_iterator ;
 				typedef std::pair<const_iterator, const_iterator>
 															pair_it ;
 				typedef std::vector<pair_it>				list_pair_it ;
@@ -92,8 +93,8 @@ namespace warg
 
 			virtual
 			void set_haystack
-				( typename haystack_string::const_iterator begin
-				, typename haystack_string::const_iterator end) ;
+				( typename haystack_string::iterator begin
+				, typename haystack_string::iterator end) ;
 
 			virtual
 			typename haystack_string::list_pair_it const &
@@ -126,8 +127,8 @@ namespace warg
 
 	template<typename StrNeedle, typename StrHaystack>
 	void search_engine<StrNeedle,StrHaystack>::set_haystack
-	( typename haystack_string::const_iterator begin
-	, typename haystack_string::const_iterator end)
+	( typename haystack_string::iterator begin
+	, typename haystack_string::iterator end)
 	{
 		m_haystack.first = begin ;
 		m_haystack.second = end ;
@@ -226,6 +227,10 @@ namespace warg
 			operator bool () ;
 
 	} /* class search_plain<StrNeedle,StrHaystack> */ ;
+
+	typedef search_engine	<Glib::ustring, Gtk::TextBuffer> search_engine_gtk ;
+	typedef search_plain	<Glib::ustring, Gtk::TextBuffer> search_plain_gtk ;
+	typedef search_regex	<Glib::ustring, Gtk::TextBuffer> search_regex_gtk ;
 
 } // namespace warg
 

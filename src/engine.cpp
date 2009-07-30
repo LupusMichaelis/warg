@@ -5,7 +5,6 @@
 
 #include <string>
 #include <glibmm/unicode.h>
-#include <gtkmm/textbuffer.h>
 
 #include "engine-impl.h"
 #include "engine-impl.h"

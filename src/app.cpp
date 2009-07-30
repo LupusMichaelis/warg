@@ -47,7 +47,6 @@ namespace warg
 	}
 
 	app::app()
-		: mp_search_engine(0)
 	{
 	}
 
@@ -65,6 +64,7 @@ namespace warg
 		, mp_results(tree_model::create())
 		, mp_haystack(Gtk::TextBuffer::create())
 		, mp_needle(Gtk::TextBuffer::create())
+		, mp_search_engine(0)
 	{
 		mp_search_engine = new search_plain<Glib::ustring, Gtk::TextBuffer> ;
 
@@ -126,18 +126,18 @@ namespace warg
 		// tag->property_background() = "blue" ;
 
 		Glib::RefPtr<Gtk::TextBuffer::TagTable> table_results = mp_haystack->get_tag_table() ;
-
 		Glib::RefPtr<Gtk::TextBuffer::Tag> tag_result = Gtk::TextBuffer::Tag::create();
 		tag_result->property_foreground() = "blue" ;
 		table_results->add(tag_result) ;
 
-		// typedef search_engine<Glib::ustring, Gtk::TextBuffer>::map_list_pair_it map ;
-		typedef search_engine<Glib::ustring, Gtk::TextBuffer>::haystack_string::list_pair_it list_results ;
-		list_results const & results = mp_search_engine->get_results() ;
-		for(list_results::const_iterator p_result = results.begin()
+		list_results results = mp_search_engine->get_results() ;
+		for(list_results::iterator p_result = results.begin()
 				; p_result != results.end()
 				; p_result++)
-			mp_haystack->apply_tag(tag_result, p_result->first, p_result->second) ;
+			mp_haystack->apply_tag(tag_result
+					, p_result->first
+					, p_result->second
+					) ;
 
 
 		Glib::RefPtr<Gtk::TextBuffer::TagTable> table_marks = mp_needle->get_tag_table() ;

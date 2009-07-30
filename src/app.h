@@ -55,9 +55,6 @@ namespace warg
 			virtual
 			void error_display(std::string const & msg, std::ptrdiff_t position) = 0 ;
 
-		protected:
-			search_engine<Glib::ustring, Gtk::TextBuffer> * mp_search_engine ;
-
 	} /* class app */ ;
 
 
@@ -121,6 +118,10 @@ namespace warg
 			// Glib::RefPtr<Gtk::ListStore>	mp_results ;
 			Glib::RefPtr<Gtk::TextBuffer>	mp_haystack ;
 			Glib::RefPtr<Gtk::TextBuffer>	mp_needle ;
+
+			typedef search_engine<Glib::ustring, Gtk::TextBuffer> search_engine_type ;
+			typedef search_engine_type::haystack_string::list_pair_it list_results ;
+			search_engine_type * mp_search_engine ;
 
 		public:
 			virtual
