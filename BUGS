@@ -1,0 +1,10 @@
+Known bugs
+
+warg::about_dialog 
+	Show the about dialog
+	Click a button : nothing happend until an undeterminate time
+
+Regex
+	That's the hell. If flags |= match_any isn't match, the
+	regex_searcher loop indifinetly, or raise an echausted memory event (?)
+	http://svn.boost.org/trac/boost/ticket/2165
