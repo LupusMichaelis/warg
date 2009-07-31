@@ -175,13 +175,13 @@ namespace warg
 				, typename boost::regex_traits<typename parent_t::needle_string::type::value_type> >
 					m_regex ;
 
-			typename parent_t::needle_string::list_pair_it m_marks_list ;
+			typename parent_t::needle_string::list_pair_it m_subexpressions_list ;
 
 		public:
 			search_regex()
 				: parent_t()
 				, m_regex()
-				, m_marks_list()
+				, m_subexpressions_list()
 			{
 			}
 			
@@ -195,7 +195,7 @@ namespace warg
 			void set_needle(StrNeedle const & needle) ;
 
 			virtual
-			typename parent_t::needle_string::list_pair_it
+			void // typename parent_t::needle_string::list_pair_it
 			retrieve_marks() ;
 
 	} /* class search_regex<StrNeedle,StrHaystack> */ ;

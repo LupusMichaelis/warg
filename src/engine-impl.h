@@ -127,15 +127,15 @@ namespace warg
 	}
 
 	template<typename StrNeedle, typename StrHaystack>
-	typename search_engine<StrNeedle,StrHaystack>::needle_string::list_pair_it
+	void // typename search_engine<StrNeedle,StrHaystack>::needle_string::list_pair_it
 	search_regex<StrNeedle,StrHaystack>::retrieve_marks()
 	{
-		m_marks_list.clear() ;
+		m_subexpressions_list.clear() ;
 
-		for(size_t index ; index < m_regex.mark_count() ; index++)
-			m_marks_list.push_back(m_regex.get_mark(index)) ;
+		for(size_t index = 1 ; index < m_regex.mark_count() ; index++)
+			m_subexpressions_list.push_back(m_regex.subexpression(index)) ;
 
-		return m_marks_list ;
+		// return m_subexpressions_list ;
 	}
 
 } // namespace warg

@@ -23,8 +23,10 @@ namespace warg
 	template class search_plain		<Glib::ustring> ;
 	template class search_regex		<Glib::ustring> ;
 
+	/*
 	template class search_engine	<Glib::ustring, Gtk::TextBuffer> ;
 	template class search_plain		<Glib::ustring, Gtk::TextBuffer> ;
 	template class search_regex		<Glib::ustring, Gtk::TextBuffer> ;
+	*/
 
 } // namespace warg
