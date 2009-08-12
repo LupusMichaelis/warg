@@ -7,7 +7,6 @@
 #	include <vector>
 
 /*
-#	include <glibmm/ustring.h>
 #	include <gtkmm/textbuffer.h>
 */
 
@@ -29,7 +28,6 @@ namespace warg
 	} /* class search_exception */ ;
 #endif // 0
 
-	/*
 	template<typename StrNeedle, typename StrHaystack = StrNeedle>
 	class search_engine ;
 
@@ -38,11 +36,9 @@ namespace warg
 
 	template<typename StrNeedle, typename StrHaystack = StrNeedle>
 	class search_regex ;
-	*/
-
 
 	// search_engine ////////////////////////////////////////////////////////////////
-	template<typename StrNeedle, typename StrHaystack = StrNeedle >
+	template<typename StrNeedle, typename StrHaystack>
 	class search_engine
 	{
 			template<typename Str>
@@ -154,13 +150,16 @@ namespace warg
 	}
 
 	// search_regex ////////////////////////////////////////////////////////////////
-	template<typename StrNeedle, typename StrHaystack = StrNeedle>
+	template<typename StrNeedle, typename StrHaystack>
 	class search_regex
 		: public search_engine<StrNeedle, StrHaystack>
 	{
 		public:
 			typedef search_engine<StrNeedle,StrHaystack> parent_t ;
 
+			typedef boost::match_results
+				<typename parent_t::haystack_string::type::iterator>
+				regex_results  ;
 			typedef boost::basic_regex
 				<typename parent_t::needle_string::type::value_type
 				, typename boost::regex_traits<typename parent_t::needle_string::type::value_type> >
@@ -204,7 +203,7 @@ namespace warg
 	}
 
 	// search_plain ////////////////////////////////////////////////////////////////
-	template<typename StrNeedle, typename StrHaystack = StrNeedle>
+	template<typename StrNeedle, typename StrHaystack>
 	class search_plain
 		: public search_engine<StrNeedle, StrHaystack>
 	{
@@ -224,25 +223,9 @@ namespace warg
 
 	} /* class search_plain<StrNeedle,StrHaystack> */ ;
 
-	/*
-	typedef search_engine	<Glib::ustring, Gtk::TextBuffer> search_engine_gtk ;
-	typedef search_plain	<Glib::ustring, Gtk::TextBuffer> search_plain_gtk ;
-	typedef search_regex	<Glib::ustring, Gtk::TextBuffer> search_regex_gtk ;
-	*/
-
-	/*
 	extern template class search_engine<std::string> ;
-	extern template class search_engine<Glib::ustring> ;
-	extern template class search_engine	<std::wstring> ;
-	*/
-	/*
 	extern template class search_regex<std::string> ;
-	extern template class search_regex<Glib::ustring> ;
-	*/
-	/*
 	extern template class search_plain<std::string> ;
-	extern template class search_plain<Glib::ustring> ;
-	*/
 
 } // namespace warg
 

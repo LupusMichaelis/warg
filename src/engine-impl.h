@@ -77,9 +77,6 @@ namespace warg
 	{
 		this->m_results.clear() ;
 
-		boost::match_results<typename parent_t::haystack_string::type::iterator>
-			matches  ;
-
 		typename parent_t::haystack_string::type::iterator
 			start = this->m_haystack.first
 			, end = this->m_haystack.second ;
@@ -92,11 +89,14 @@ namespace warg
 #if DEBUG
 		std::cout << boost::format("submatches (%u) Position 1 (%u) sub()")
 				% m_regex.mark_count()
-				% std::string(m_regex.subexpression(0).first, m_regex.subexpression(0).second)
+				% std::string(m_regex.subexpression(1).first, m_regex.subexpression(1).second++)
 				<< std::endl ;
 #endif // DEBUG
 
-		while(start != end and regex_search(start, end, matches, m_regex, flags))
+		regex_results matches  ;
+
+		while(start != end
+				and boost::regex_search(start, end, matches, m_regex, flags))
 		{
 			this->m_results.push_back(matches[0]) ;
 
@@ -135,11 +135,13 @@ namespace warg
 
 		std::cout << m_regex.mark_count() << std::endl ;
 
+		/*
 		for(size_t index = 1 ; index < m_regex.mark_count() ; index++)
 		{
 			pair_const_it found = m_regex.subexpression(index) ;
 			m_subexpressions_list.push_back(found) ;
 		}
+		*/
 
 		// return m_subexpressions_list ;
 	}

@@ -40,7 +40,9 @@ all: test $(TARGET) g$(TARGET)
 test: $(TESTBUILDS)
 
 tests/test_app_cli: tests/test_app_cli.o src/app_cli.o src/app.o
-tests/test_engine: tests/test_engine.o src/engine.o 
+tests/test_engine: tests/test_engine.o src/engine.o
+tests/test_engine_u: tests/test_engine_u.o src/engine-ustring.o
+tests/test_engine_w: tests/test_engine_w.o src/engine-wstring.o 
 
 %.o: %.h %.cpp
 
