@@ -1,6 +1,6 @@
-#include "app.h"
-#include "gui.h"
-#include "config.h"
+#include "app.hpp"
+#include "gui.hpp"
+#include "config.hpp"
 
 #if DEBUG
 #	include <iostream>

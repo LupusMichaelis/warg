@@ -5,7 +5,7 @@
 #	include <iostream>
 #endif // DEBUG
 
-#include "engine.h"
+#include "engine.hpp"
 
 #include <algorithm>
 #include <boost/format.hpp>

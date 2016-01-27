@@ -1,4 +1,4 @@
-#include "app_gtk.h"
+#include "app_gtk.hpp"
 
 namespace warg
 {

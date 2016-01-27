@@ -1,7 +1,7 @@
 #ifndef H_WARG_GTK_APP
 #	define H_WARG_GTK_APP
 
-#	include "app.h"
+#	include "app.hpp"
 
 namespace warg
 {

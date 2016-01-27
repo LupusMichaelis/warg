@@ -5,9 +5,9 @@
 #include <algorithm>
 #include <boost/regex.hpp>
 
-#include "app.h"
-#include "app_gtk.h"
-#include "app_cli.h"
+#include "app.hpp"
+#include "app_gtk.hpp"
+#include "app_cli.hpp"
 
 namespace warg
 {

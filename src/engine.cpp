@@ -7,8 +7,8 @@
 #include <glibmm/unicode.h>
 #include <gtkmm/textview.h>
 
-#include "engine.h"
-#include "engine-impl.h"
+#include "engine.hpp"
+#include "engine-impl.hpp"
 
 namespace warg
 {

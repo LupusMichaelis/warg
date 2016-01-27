@@ -3,15 +3,14 @@
 
 #	include <string>
 
-#	include "config.h"
-
-#	include "regex.h"
+#	include "config.hpp"
+#	include "regex.hpp"
 /*
 #	include "xml.h"
 #	include "sql.h"
 */
-#	include "engine.h"
-#	include "gui.h"
+#	include "engine.hpp"
+#	include "gui.hpp"
 
 namespace warg
 {
