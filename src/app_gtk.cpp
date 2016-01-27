@@ -23,8 +23,8 @@ namespace warg
 		m_window.set_default_size(430,600);
 		m_window.move(120, 120);
 
-		mp_haystack->set_text("(\\w+) (\\d+)");
-		mp_needle->set_text("They are some people who think the answer is 42.");
+		mp_haystack->set_text("They are some people who think the answer is 42.");
+		mp_needle->set_text("(\\w+) (\\d+)");
 
 		m_window.bind_haystack(mp_haystack);
 		m_window.bind_results(mp_results);
