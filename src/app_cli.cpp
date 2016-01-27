@@ -4,6 +4,8 @@
 
 namespace warg
 {
+	const std::string app_cli::c_appname = BIN_NAME_CLI ;
+
 	app_cli::app_cli()
 	{
 	}

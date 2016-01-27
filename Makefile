@@ -3,6 +3,7 @@ TARGET=warg
 CC=g++
 DB=gdb
 CXXFLAGS= \
+		-std=c++14  \
 		-W -Wall \
 		-Wno-multichar \
 		-Wno-unused-parameter \
@@ -11,13 +12,12 @@ CXXFLAGS= \
 		-Isrc/ \
 		-DGTKMM_DISABLE_DEPRECATED \
 		`pkg-config gtkmm-2.4 --cflags` \
-#
-#		-Werror \
+		-Werror \
 
 LDFLAGS= \
 		-L. \
 		-g -ggdb \
-		-lboost_regex-mt \
+		-lboost_regex \
 		`pkg-config gtkmm-2.4 --libs` \
 #
 SRCDIR=src/

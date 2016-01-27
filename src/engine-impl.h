@@ -71,6 +71,7 @@ namespace warg
 		return !this->m_results.empty() ;
 	}
 
+#if 0
 	// search_regex ////////////////////////////////////////////////////////////////
 	template<typename StrNeedle, typename StrHaystack>
 	search_regex<StrNeedle,StrHaystack>::operator bool ()
@@ -145,6 +146,8 @@ namespace warg
 
 		// return m_subexpressions_list ;
 	}
+
+#endif // 0
 
 } // namespace warg
 

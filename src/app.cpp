@@ -6,6 +6,8 @@
 #include <boost/regex.hpp>
 
 #include "app.h"
+#include "app_gtk.h"
+#include "app_cli.h"
 
 namespace warg
 {
@@ -16,23 +18,17 @@ namespace warg
 	char const * c_version = VERSION ;
 	char const * c_appname = APPNAME ;
 
-#if 0
-	const std::string app_gtk::c_appname = BIN_NAME_GTK ;
-	const std::string app_cli::c_appname = BIN_NAME_CLI ;
-
 	int app::main(int argc, char **argv)
 	{
-		std::string app_name(*argv) ;
+		std::string app_name(*argv);
 
-		/* \xxx app_name must be the filename, not the complete path
-		*/
-		if(app_name == app_gtk::c_appname)
+		if(app_name.cend() != std::find_end(app_name.cbegin(), app_name.cend(), std::begin(app_gtk::c_appname), std::end(app_gtk::c_appname)))
 		{
 			Gtk::Main kit(argc, argv) ;
 			warg::app_gtk app ;
 			Gtk::Main::run(app.m_window) ;
 		}
-		else if(app_name == app_cli::c_appname)
+		else if(app_name.cend() != std::find_end(app_name.cbegin(), app_name.cend(), std::begin(app_cli::c_appname), std::end(app_cli::c_appname)))
 			return c_shell_err_todo ;
 		else
 		{
@@ -46,7 +42,6 @@ namespace warg
 
 		return c_shell_success ;
 	}
-#endif // 0
 
 	app::app()
 	{

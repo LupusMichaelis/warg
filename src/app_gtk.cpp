@@ -3,6 +3,8 @@
 namespace warg
 {
 
+	const std::string app_gtk::c_appname = BIN_NAME_GTK;
+
 	app_gtk::~app_gtk()
 	{
 	}
@@ -95,13 +97,15 @@ namespace warg
 		tag_marks->property_foreground() = "cyan" ;
 		table_marks->add(tag_marks) ;
 
-		typedef search_engine_gtk::needle_string::list_pair_it list_marks ;
+/*
+		typedef search_engine<Glib::ustring, Gtk::TextBuffer>::needle_string::list_pair_it list_marks ;
 		list_marks const & marks = static_cast<search_regex<Glib::ustring,Gtk::TextBuffer> *>(mp_search_engine)
 			->retrieve_marks() ;
 		for(list_marks::const_iterator p_mark = marks.begin()
 				; p_mark != marks.end()
 				; p_mark++)
 			mp_needle->apply_tag(tag_result, p_mark->first, p_mark->second) ;
+*/
 	}
 
 	void app_gtk::store_results()
@@ -140,9 +144,11 @@ namespace warg
 			case 1 :
 				mp_search_engine = new search_plain<Glib::ustring,Gtk::TextBuffer> ;
 				break ;
+/*
 			case 2 :
 				mp_search_engine = new search_regex<Glib::ustring,Gtk::TextBuffer> ;
 				break ;
+*/
 			default:
 				mp_search_engine = 0 ;
 		}

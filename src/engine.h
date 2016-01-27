@@ -34,8 +34,10 @@ namespace warg
 	template<typename StrNeedle, typename StrHaystack = StrNeedle>
 	class search_plain ;
 
+	/*
 	template<typename StrNeedle, typename StrHaystack = StrNeedle>
 	class search_regex ;
+	*/
 
 	// search_engine ////////////////////////////////////////////////////////////////
 	template<typename StrNeedle, typename StrHaystack>
@@ -46,12 +48,8 @@ namespace warg
 			{
 				typedef Str								type ;
 				typedef typename type::iterator			iterator ;
-				typedef typename type::const_iterator	const_iterator ;
-				// typedef typename type::iterator::value_type * const	const_iterator ;
 				typedef std::pair<iterator, iterator>	pair_it ;
-				typedef std::pair<const_iterator, const_iterator>
-														pair_const_it ;
-				typedef std::vector<pair_const_it>		list_pair_it ;
+				typedef std::vector<pair_it>			list_pair_it ;
 				typedef std::vector<list_pair_it>		list_list_pair_it ;
 			} /* struct str<Str> */ ;
 
@@ -149,6 +147,7 @@ namespace warg
 		return m_subresults.size() ;
 	}
 
+#if 0
 	// search_regex ////////////////////////////////////////////////////////////////
 	template<typename StrNeedle, typename StrHaystack>
 	class search_regex
@@ -201,6 +200,7 @@ namespace warg
 				, regex_type::save_subexpression_location
 				) ;
 	}
+#endif // 0
 
 	// search_plain ////////////////////////////////////////////////////////////////
 	template<typename StrNeedle, typename StrHaystack>
@@ -224,7 +224,7 @@ namespace warg
 	} /* class search_plain<StrNeedle,StrHaystack> */ ;
 
 	extern template class search_engine<std::string> ;
-	extern template class search_regex<std::string> ;
+//	extern template class search_regex<std::string> ;
 	extern template class search_plain<std::string> ;
 
 } // namespace warg

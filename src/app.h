@@ -21,7 +21,7 @@ namespace warg
 	class app
 	{
 		public:
-			// static int main(int argc, char **argv) ;
+			static int main(int argc, char **argv);
 
 			static const int c_shell_success ;
 			static const int c_shell_err_appname  ;
@@ -52,7 +52,7 @@ namespace warg
 			void switch_engine(int const id) = 0 ;
 
 			virtual
-			void error_display(std::string const msg, std::ptrdiff_t position) = 0 ;
+			void error_display(std::string const & msg, std::ptrdiff_t position) = 0 ;
 
 	} /* class app */ ;
 

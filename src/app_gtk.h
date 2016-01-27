@@ -57,7 +57,7 @@ namespace warg
 			void error_clear() ;
 
 			virtual
-			void error_display(std::string const & msg, std::ptrdiff_t position) ;
+			void error_display(std::string const & msg, std::ptrdiff_t position);
 
 	} /* class app_gtk */ ;
 
