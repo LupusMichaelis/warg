@@ -3,6 +3,8 @@
 
 #	include "app.hpp"
 
+#	include <memory>
+
 namespace warg
 {
 
@@ -29,7 +31,7 @@ namespace warg
 
 			typedef search_engine<Glib::ustring, Gtk::TextBuffer> search_engine_type;
 			typedef search_engine_type::haystack_string::list_pair_it list_results;
-			search_engine_type * mp_search_engine;
+			std::unique_ptr<search_engine_type> mp_search_engine;
 
 		public:
 			virtual

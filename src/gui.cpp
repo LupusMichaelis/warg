@@ -40,9 +40,8 @@ namespace warg
 		m_about.set_right_justified();
 		append(m_about);
 
-		for(Gtk::Menu::MenuList::iterator mi = items().begin()
-				; mi != items().end()
-				; mi++) mi->set_sensitive(false);
+		for(auto & item: items())
+			item.set_sensitive(false);
 
 		/*
 		using namespace boost::lambda;
@@ -65,8 +64,8 @@ namespace warg
 		, m_container()
 		, m_signal_choose()
 	{
-		Gtk::RadioButton::Group grp = m_plain.get_group();
-		m_regex.set_group(grp);
+		auto group = m_plain.get_group();
+		m_regex.set_group(group);
 
 		m_container.pack_start(m_plain, Gtk::PACK_SHRINK);
 		m_container.pack_start(m_regex, Gtk::PACK_SHRINK);

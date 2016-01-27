@@ -20,7 +20,7 @@ namespace warg
 
 	int app::main(int argc, char **argv)
 	{
-		std::string app_name(*argv);
+		std::string app_name{*argv};
 
 		if(app_name.cend() != std::find_end(app_name.cbegin(), app_name.cend(), std::begin(app_gtk::c_appname), std::end(app_gtk::c_appname)))
 		{
