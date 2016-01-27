@@ -19,24 +19,24 @@ namespace warg
 		: public std::runtime_error
 	{
 		public:
-			explicit search_exception() ;
+			explicit search_exception();
 			
 			virtual
-			~search_exception() ;
+			~search_exception();
 
 		protected:
-	} /* class search_exception */ ;
+	} /* class search_exception */;
 #endif // 0
 
 	template<typename StrNeedle, typename StrHaystack = StrNeedle>
-	class search_engine ;
+	class search_engine;
 
 	template<typename StrNeedle, typename StrHaystack = StrNeedle>
-	class search_plain ;
+	class search_plain;
 
 	/*
 	template<typename StrNeedle, typename StrHaystack = StrNeedle>
-	class search_regex ;
+	class search_regex;
 	*/
 
 	// search_engine ////////////////////////////////////////////////////////////////
@@ -46,57 +46,57 @@ namespace warg
 			template<typename Str>
 			struct str
 			{
-				typedef Str								type ;
-				typedef typename type::iterator			iterator ;
-				typedef std::pair<iterator, iterator>	pair_it ;
-				typedef std::vector<pair_it>			list_pair_it ;
-				typedef std::vector<list_pair_it>		list_list_pair_it ;
-			} /* struct str<Str> */ ;
+				typedef Str								type;
+				typedef typename type::iterator			iterator;
+				typedef std::pair<iterator, iterator>	pair_it;
+				typedef std::vector<pair_it>			list_pair_it;
+				typedef std::vector<list_pair_it>		list_list_pair_it;
+			} /* struct str<Str> */;
 
 		public:
-			typedef str<StrNeedle>		needle_string ;
-			typedef str<StrHaystack>	haystack_string ;
+			typedef str<StrNeedle>		needle_string;
+			typedef str<StrHaystack>	haystack_string;
 
-			// typedef std::list<std::pair<typename Str::iterator, typename Str::iterator> > list_pair_it ;
+			// typedef std::list<std::pair<typename Str::iterator, typename Str::iterator> > list_pair_it;
 
 		protected:
-			typename needle_string::type					m_needle ;
+			typename needle_string::type					m_needle;
 
-			typename haystack_string::pair_it				m_haystack ;
-			typename haystack_string::list_pair_it			m_results ;
-			typename haystack_string::list_list_pair_it		m_subresults ;
+			typename haystack_string::pair_it				m_haystack;
+			typename haystack_string::list_pair_it			m_results;
+			typename haystack_string::list_list_pair_it		m_subresults;
 
 		public:
-			search_engine() ;
+			search_engine();
 
 			virtual
-			~search_engine() { } ;
+			~search_engine() { };
 
 			virtual
-			operator bool() = 0 ;
+			operator bool() = 0;
 
 			virtual
-			void set_needle(StrNeedle const needle) ;
+			void set_needle(StrNeedle const needle);
 
 			virtual
 			void set_haystack
 				( typename haystack_string::iterator begin
-				, typename haystack_string::iterator end) ;
+				, typename haystack_string::iterator end);
 
 			virtual
 			typename haystack_string::list_pair_it const &
-			get_results() const ;
+			get_results() const;
 
 			virtual
-			typename haystack_string::list_pair_it const & get_subresults(size_t const idx) const ;
+			typename haystack_string::list_pair_it const & get_subresults(size_t const idx) const;
 
 			virtual
-			bool has_subresults() const ;
+			bool has_subresults() const;
 
 			virtual
-			typename haystack_string::list_pair_it::size_type size_subresults() const ;
+			typename haystack_string::list_pair_it::size_type size_subresults() const;
 
-	} /* class search_engine<StrNeedle,StrHaystack> */ ;
+	} /* class search_engine<StrNeedle,StrHaystack> */;
 
 	template<typename StrNeedle, typename StrHaystack>
 	search_engine<StrNeedle,StrHaystack>::search_engine()
@@ -109,7 +109,7 @@ namespace warg
 	template<typename StrNeedle, typename StrHaystack>
 	void search_engine<StrNeedle,StrHaystack>::set_needle(StrNeedle const needle)
 	{
-		m_needle = needle ;
+		m_needle = needle;
 	}
 
 	template<typename StrNeedle, typename StrHaystack>
@@ -117,34 +117,34 @@ namespace warg
 	( typename haystack_string::iterator begin
 	, typename haystack_string::iterator end)
 	{
-		m_haystack = typename haystack_string::pair_it(begin, end) ;
+		m_haystack = typename haystack_string::pair_it(begin, end);
 	}
 
 	template<typename StrNeedle, typename StrHaystack>
 	typename search_engine<StrNeedle, StrHaystack>::haystack_string::list_pair_it const &
 	search_engine<StrNeedle,StrHaystack>::get_results() const
 	{
-		return m_results ;
+		return m_results;
 	}
 
 	template<typename StrNeedle, typename StrHaystack>
 	typename search_engine<StrNeedle,StrHaystack>::haystack_string::list_pair_it const & 
 	search_engine<StrNeedle,StrHaystack>::get_subresults(size_t const idx) const
 	{
-		return m_subresults[idx] ;
+		return m_subresults[idx];
 	}
 
 	template<typename StrNeedle, typename StrHaystack>
 	bool search_engine<StrNeedle,StrHaystack>::has_subresults() const
 	{
-		return m_subresults.size() > 0 ;
+		return m_subresults.size() > 0;
 	}
 
 	template<typename StrNeedle, typename StrHaystack>
 	typename search_engine<StrNeedle,StrHaystack>::haystack_string::list_pair_it::size_type
 	search_engine<StrNeedle,StrHaystack>::size_subresults() const
 	{
-		return m_subresults.size() ;
+		return m_subresults.size();
 	}
 
 #if 0
@@ -154,20 +154,20 @@ namespace warg
 		: public search_engine<StrNeedle, StrHaystack>
 	{
 		public:
-			typedef search_engine<StrNeedle,StrHaystack> parent_t ;
+			typedef search_engine<StrNeedle,StrHaystack> parent_t;
 
 			typedef boost::match_results
 				<typename parent_t::haystack_string::type::iterator>
-				regex_results  ;
+				regex_results;
 			typedef boost::basic_regex
 				<typename parent_t::needle_string::type::value_type
 				, typename boost::regex_traits<typename parent_t::needle_string::type::value_type> >
-				regex_type ;
+				regex_type;
 
 		protected:
-			regex_type m_regex ;
+			regex_type m_regex;
 
-			typename parent_t::needle_string::list_pair_it m_subexpressions_list ;
+			typename parent_t::needle_string::list_pair_it m_subexpressions_list;
 
 		public:
 			search_regex()
@@ -181,24 +181,24 @@ namespace warg
 			~search_regex() { }
 
 			virtual
-			operator bool () ;
+			operator bool ();
 
 			virtual
-			void set_needle(StrNeedle const needle) ;
+			void set_needle(StrNeedle const needle);
 
 			virtual
 			void // typename parent_t::needle_string::list_pair_it
-			retrieve_marks() ;
+			retrieve_marks();
 
-	} /* class search_regex<StrNeedle,StrHaystack> */ ;
+	} /* class search_regex<StrNeedle,StrHaystack> */;
 
 	template<typename StrNeedle, typename StrHaystack>
 	void search_regex<StrNeedle,StrHaystack>::set_needle(StrNeedle const needle)
 	{
-		this->m_needle = needle ;
+		this->m_needle = needle;
 		m_regex.assign(needle.begin(), needle.end()
 				, regex_type::save_subexpression_location
-				) ;
+				);
 	}
 #endif // 0
 
@@ -208,7 +208,7 @@ namespace warg
 		: public search_engine<StrNeedle, StrHaystack>
 	{
 		public:
-			typedef search_engine<StrNeedle,StrHaystack> parent_t ;
+			typedef search_engine<StrNeedle,StrHaystack> parent_t;
 
 		protected:
 			
@@ -219,13 +219,13 @@ namespace warg
 			~search_plain() { }
 
 			virtual
-			operator bool () ;
+			operator bool ();
 
-	} /* class search_plain<StrNeedle,StrHaystack> */ ;
+	} /* class search_plain<StrNeedle,StrHaystack> */;
 
-	extern template class search_engine<std::string> ;
-//	extern template class search_regex<std::string> ;
-	extern template class search_plain<std::string> ;
+	extern template class search_engine<std::string>;
+//	extern template class search_regex<std::string>;
+	extern template class search_plain<std::string>;
 
 } // namespace warg
 

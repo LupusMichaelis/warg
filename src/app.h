@@ -15,46 +15,46 @@
 
 namespace warg
 {
-	extern char const * c_version ;
-	extern char const * c_appname ;
+	extern char const * c_version;
+	extern char const * c_appname;
 
 	class app
 	{
 		public:
 			static int main(int argc, char **argv);
 
-			static const int c_shell_success ;
-			static const int c_shell_err_appname  ;
-			static const int c_shell_err_todo ;
+			static const int c_shell_success;
+			static const int c_shell_err_appname;
+			static const int c_shell_err_todo;
 
 		public:
-			app() ;
+			app();
 
 			virtual
-			void search() = 0 ;
+			void search() = 0;
 			
 			virtual
-			~app() ;
+			~app();
 
 			virtual
-			void highlight_clear() = 0 ;
+			void highlight_clear() = 0;
 
 			virtual
-			void highlight_results() = 0 ;
+			void highlight_results() = 0;
 
 			virtual
-			void store_results() = 0 ;
+			void store_results() = 0;
 
 			virtual
-			void unstore_results() = 0 ;
+			void unstore_results() = 0;
 
 			virtual
-			void switch_engine(int const id) = 0 ;
+			void switch_engine(int const id) = 0;
 
 			virtual
-			void error_display(std::string const & msg, std::ptrdiff_t position) = 0 ;
+			void error_display(std::string const & msg, std::ptrdiff_t position) = 0;
 
-	} /* class app */ ;
+	} /* class app */;
 
 
 } // namespace warg

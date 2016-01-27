@@ -19,176 +19,176 @@ namespace warg
 		: public Gtk::AboutDialog
 	{
 		protected:
-			typedef Gtk::AboutDialog parent_t ;
+			typedef Gtk::AboutDialog parent_t;
 
 		public:
-			about_dialog() ;
-			~about_dialog() ;
+			about_dialog();
+			~about_dialog();
 
 			virtual
 			void on_response(int response_id);
 
-	} /* class about_dialog */ ;
+	} /* class about_dialog */;
 
 	class main_menubar
 		: public Gtk::MenuBar
 	{
 		protected:
-			typedef Gtk::MenuBar parent_t ;
+			typedef Gtk::MenuBar parent_t;
 
 		protected:
-			Gtk::Menu m_menu_file ;
-			Gtk::Menu m_menu_edit ;
-			Gtk::Menu m_menu_about ;
+			Gtk::Menu m_menu_file;
+			Gtk::Menu m_menu_edit;
+			Gtk::Menu m_menu_about;
 
-			Gtk::MenuItem m_file ;
-			Gtk::MenuItem m_file_open ;
-			Gtk::MenuItem m_file_save ;
-			Gtk::MenuItem m_edit ;
-			Gtk::MenuItem m_edit_copy ;
-			Gtk::MenuItem m_edit_paste ;
-			Gtk::MenuItem m_edit_cut ;
-			Gtk::MenuItem m_about ;
+			Gtk::MenuItem m_file;
+			Gtk::MenuItem m_file_open;
+			Gtk::MenuItem m_file_save;
+			Gtk::MenuItem m_edit;
+			Gtk::MenuItem m_edit_copy;
+			Gtk::MenuItem m_edit_paste;
+			Gtk::MenuItem m_edit_cut;
+			Gtk::MenuItem m_about;
 
 		public:
-			main_menubar() ;
+			main_menubar();
 
 			virtual
-			Glib::SignalProxy0<void> signal_about() ;
+			Glib::SignalProxy0<void> signal_about();
 
-	} /* class main_menu */ ;
+	} /* class main_menu */;
 
 	class engine_switcher
 		: public Gtk::Frame
 	{
 		public:
-			typedef Gtk::Frame parent_t ;
+			typedef Gtk::Frame parent_t;
 
 		protected:
-			// std::list<Gtk::RadioButton> m_radios ;
-			Gtk::RadioButton	m_plain ;
-			Gtk::RadioButton	m_regex ;
-			Gtk::HBox			m_container ;
+			// std::list<Gtk::RadioButton> m_radios;
+			Gtk::RadioButton	m_plain;
+			Gtk::RadioButton	m_regex;
+			Gtk::HBox			m_container;
 
-			sigc::signal<void, int> m_signal_choose ;
+			sigc::signal<void, int> m_signal_choose;
 
 		public:
-			engine_switcher() ;
-			~engine_switcher() ;
+			engine_switcher();
+			~engine_switcher();
 
 			virtual
-			sigc::signal<void,int> & signal_choose() ;
+			sigc::signal<void,int> & signal_choose();
 
 			virtual
-			void on_signal_choose(int idx) ;
+			void on_signal_choose(int idx);
 
-	} /* class engine_switcher */ ;
+	} /* class engine_switcher */;
 
 	class frame_dialog
 		: public Gtk::Frame
 	{
 		public:
-			typedef Gtk::Frame parent_t ;
+			typedef Gtk::Frame parent_t;
 
 		protected:
-			Gtk::TextView	m_input ;
-			Gtk::Button		m_submit ;
-			Gtk::HBox		m_container ;
+			Gtk::TextView	m_input;
+			Gtk::Button		m_submit;
+			Gtk::HBox		m_container;
 
 		public:
 			frame_dialog
 				( Glib::ustring const & caption
-				, Glib::ustring const & action_label) ;
+				, Glib::ustring const & action_label);
 
 			virtual
-			Glib::SignalProxy0<void> signal_submit() ;
+			Glib::SignalProxy0<void> signal_submit();
 
-			void set_buffer(Glib::RefPtr<Gtk::TextBuffer> const & buffer) ;
+			void set_buffer(Glib::RefPtr<Gtk::TextBuffer> const & buffer);
 
 			virtual
-			~frame_dialog() ;
+			~frame_dialog();
 
-	} /* class frame_dialog */ ;
+	} /* class frame_dialog */;
 
 	class tree_view
 		: public Gtk::TreeView
 	{
 		public:
-			typedef Gtk::TreeView parent_t ;
+			typedef Gtk::TreeView parent_t;
 
 		public:
 			virtual
-			void set_model(const Glib::RefPtr<Gtk::TreeModel> & model) ;
-	} /* class tree_view */ ;
+			void set_model(const Glib::RefPtr<Gtk::TreeModel> & model);
+	} /* class tree_view */;
 
 	class tree_model
 		: public Gtk::ListStore
 	{
 		public:
-			typedef Gtk::ListStore parent_t ;
-			typedef parent_t::Row Row ;
+			typedef Gtk::ListStore parent_t;
+			typedef parent_t::Row Row;
 
-			static Glib::RefPtr<tree_model> create() ;
+			static Glib::RefPtr<tree_model> create();
 
 		protected:
-			Gtk::TreeModelColumn<guint> m_index ;
-			Gtk::TreeModelColumn<Glib::ustring> m_match ;
+			Gtk::TreeModelColumn<guint> m_index;
+			Gtk::TreeModelColumn<Glib::ustring> m_match;
 
 		public:
-			tree_model() ;
+			tree_model();
 
-			Gtk::TreeModelColumn<guint> &				get_index_column() ;
-			Gtk::TreeModelColumn<guint> const &			get_index_column() const ;
-			Gtk::TreeModelColumn<Glib::ustring> &		get_match_column() ;
-			Gtk::TreeModelColumn<Glib::ustring> const &	get_match_column() const ;
+			Gtk::TreeModelColumn<guint> &				get_index_column();
+			Gtk::TreeModelColumn<guint> const &			get_index_column() const;
+			Gtk::TreeModelColumn<Glib::ustring> &		get_match_column();
+			Gtk::TreeModelColumn<Glib::ustring> const &	get_match_column() const;
 
-			void append(guint index, Glib::ustring & matched) ;
+			void append(guint index, Glib::ustring & matched);
 
-	} /* class tree_model */ ;
+	} /* class tree_model */;
 
 
 	class main_window
 		: public Gtk::Window
 	{
 		protected:
-			typedef Gtk::Window parent_t ;
+			typedef Gtk::Window parent_t;
 
 		protected:
-			frame_dialog	m_input_frame ;
-			engine_switcher m_switcher ;
-			Gtk::TextView	m_text ;
-			tree_view		m_results ;
-			Gtk::Statusbar	m_status ;
-			main_menubar	m_menu ;
-			Gtk::VBox		m_container ;
+			frame_dialog	m_input_frame;
+			engine_switcher m_switcher;
+			Gtk::TextView	m_text;
+			tree_view		m_results;
+			Gtk::Statusbar	m_status;
+			main_menubar	m_menu;
+			Gtk::VBox		m_container;
 
-			about_dialog	m_about_dlg ;
+			about_dialog	m_about_dlg;
 
 		public:
-			main_window() ;
+			main_window();
 
 			virtual
-			void bind_haystack(Glib::RefPtr<Gtk::TextBuffer> & p_model) ;
+			void bind_haystack(Glib::RefPtr<Gtk::TextBuffer> & p_model);
 
 			virtual
-			void bind_pattern(Glib::RefPtr<Gtk::TextBuffer> & p_model) ;
+			void bind_pattern(Glib::RefPtr<Gtk::TextBuffer> & p_model);
 
 			virtual
-			void bind_results(Glib::RefPtr<tree_model> & p_model) ;
+			void bind_results(Glib::RefPtr<tree_model> & p_model);
 
 			virtual
-			void set_status(Glib::ustring const & status) ;
+			void set_status(Glib::ustring const & status);
 
 			virtual
-			Glib::SignalProxy0<void> signal_match() ;
+			Glib::SignalProxy0<void> signal_match();
 
 			virtual
-			sigc::signal<void,int> & signal_choose() ;
+			sigc::signal<void,int> & signal_choose();
 
 			virtual
-			void on_about() ;
+			void on_about();
 
-	} /* class main_window */ ;
+	} /* class main_window */;
 
 } // namespace warg
 

@@ -10,14 +10,14 @@ namespace boost
 	{
 		public:
 			template <charT, traits >
-			friend std::ostream & operator << (std::ostream & out, basic_regex_ex<charT,traits> const & self) ;
-	} /* class basic_regex_ex <charT,traits> */ ;
+			friend std::ostream & operator << (std::ostream & out, basic_regex_ex<charT,traits> const & self);
+	} /* class basic_regex_ex <charT,traits> */;
 
 	template <typename charT, typename traits >
 	std::ostream & operator << (std::ostream & out, basic_regex_ex<charT,traits> const & self)
 	{
-		out << std::hex << re_detail::basic_regex_creator<charT,traits>::m_pdata ;
-		return out ;
+		out << std::hex << re_detail::basic_regex_creator<charT,traits>::m_pdata;
+		return out;
 	}
 
 } // namespace boost
