@@ -71,10 +71,9 @@ namespace warg
 		return !this->m_results.empty();
 	}
 
-#if 0
 	// search_regex ////////////////////////////////////////////////////////////////
-	template<typename StrNeedle, typename StrHaystack>
-	search_regex<StrNeedle,StrHaystack>::operator bool ()
+	template<typename StrNeedle, typename StrHaystack, typename RegexTraits>
+	search_regex<StrNeedle,StrHaystack,RegexTraits>::operator bool ()
 	{
 		this->m_results.clear();
 
@@ -88,10 +87,12 @@ namespace warg
 		// flags |= match_not_null;
 
 #if DEBUG
+		/*
 		std::cout << boost::format("submatches (%u) Position 1 (%u) sub()")
 				% m_regex.mark_count()
-				% std::string(m_regex.subexpression(1).first, m_regex.subexpression(1).second++)
+				% std::string{m_regex.subexpression(1).first, m_regex.subexpression(1).second++}
 				<< std::endl;
+		*/
 #endif // DEBUG
 
 		regex_results matches;
@@ -123,13 +124,15 @@ namespace warg
 		return true;
 	}
 
-	template<typename StrNeedle, typename StrHaystack>
+	template<typename StrNeedle, typename StrHaystack, typename RegexTraits>
 	void // typename search_engine<StrNeedle,StrHaystack>::needle_string::list_pair_it
-	search_regex<StrNeedle,StrHaystack>::retrieve_marks()
+	search_regex<StrNeedle,StrHaystack,RegexTraits>::retrieve_marks()
 	{
+		/*
 		typedef typename parent_t::haystack_string::pair_const_it pair_const_it;
 		typedef typename parent_t::haystack_string::pair_it pair_it;
 		typedef typename parent_t::haystack_string::iterator iterator;
+		*/
 
 		//std::cout << "Clear" << std::endl;
 		//m_subexpressions_list.clear();
@@ -146,8 +149,6 @@ namespace warg
 
 		// return m_subexpressions_list;
 	}
-
-#endif // 0
 
 } // namespace warg
 

@@ -1,5 +1,7 @@
 #include "app_gtk.hpp"
 
+#include <boost/regex/icu.hpp>
+
 namespace warg
 {
 
@@ -133,12 +135,10 @@ namespace warg
 				p_search_engine = std::make_unique<search_plain<Glib::ustring,Gtk::TextBuffer>>();
 				std::swap(mp_search_engine, p_search_engine);
 				break;
-/*
 			case 2:
-				p_search_engine = std::make_unique<search_regex<Glib::ustring,Gtk::TextBuffer>>();
+				p_search_engine = std::make_unique<search_regex<Glib::ustring,Gtk::TextBuffer,boost::icu_regex_traits>>();
 				std::swap(mp_search_engine, p_search_engine);
 				break;
-*/
 			default:
 				// XXX throw?
 				mp_search_engine.reset();

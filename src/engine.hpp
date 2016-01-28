@@ -11,6 +11,7 @@
 */
 
 #	include <boost/regex.hpp>
+#	include <boost/regex/icu.hpp>
 
 namespace warg
 {
@@ -34,10 +35,8 @@ namespace warg
 	template<typename StrNeedle, typename StrHaystack = StrNeedle>
 	class search_plain;
 
-	/*
-	template<typename StrNeedle, typename StrHaystack = StrNeedle>
+	template<typename StrNeedle, typename StrHaystack = StrNeedle, typename RegexTraits = boost::regex_traits<typename StrNeedle::value_type>>
 	class search_regex;
-	*/
 
 	// search_engine ////////////////////////////////////////////////////////////////
 	template<typename StrNeedle, typename StrHaystack>
@@ -147,9 +146,8 @@ namespace warg
 		return m_subresults.size();
 	}
 
-#if 0
 	// search_regex ////////////////////////////////////////////////////////////////
-	template<typename StrNeedle, typename StrHaystack>
+	template<typename StrNeedle, typename StrHaystack, typename RegexTraits>
 	class search_regex
 		: public search_engine<StrNeedle, StrHaystack>
 	{
@@ -159,9 +157,11 @@ namespace warg
 			typedef boost::match_results
 				<typename parent_t::haystack_string::type::iterator>
 				regex_results;
-			typedef boost::basic_regex
-				<typename parent_t::needle_string::type::value_type
-				, typename boost::regex_traits<typename parent_t::needle_string::type::value_type> >
+
+			/*
+			typedef boost::basic_regex<typename parent_t::needle_string::type::value_type, RegexTraits>
+			*/
+			typedef boost::u32regex
 				regex_type;
 
 		protected:
@@ -190,17 +190,14 @@ namespace warg
 			void // typename parent_t::needle_string::list_pair_it
 			retrieve_marks();
 
-	} /* class search_regex<StrNeedle,StrHaystack> */;
+	} /* class search_regex<StrNeedle,StrHaystack,RegexTraits> */;
 
-	template<typename StrNeedle, typename StrHaystack>
-	void search_regex<StrNeedle,StrHaystack>::set_needle(StrNeedle const needle)
+	template<typename StrNeedle, typename StrHaystack, typename RegexTraits>
+	void search_regex<StrNeedle, StrHaystack, RegexTraits>::set_needle(StrNeedle const needle)
 	{
 		this->m_needle = needle;
-		m_regex.assign(needle.begin(), needle.end()
-				, regex_type::save_subexpression_location
-				);
+		m_regex.assign(needle.begin(), needle.end(), regex_type::save_subexpression_location);
 	}
-#endif // 0
 
 	// search_plain ////////////////////////////////////////////////////////////////
 	template<typename StrNeedle, typename StrHaystack>
@@ -224,7 +221,7 @@ namespace warg
 	} /* class search_plain<StrNeedle,StrHaystack> */;
 
 	extern template class search_engine<std::string>;
-//	extern template class search_regex<std::string>;
+	extern template class search_regex<std::string>;
 	extern template class search_plain<std::string>;
 
 } // namespace warg
