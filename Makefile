@@ -12,6 +12,7 @@ CXXFLAGS= \
 		-Isrc/ \
 		-DGTKMM_DISABLE_DEPRECATED \
 		`pkg-config gtkmm-2.4 --cflags` \
+		`pkg-config icu-uc icu-io --libs --cflags` \
 		-Werror \
 
 LDFLAGS= \
@@ -19,6 +20,7 @@ LDFLAGS= \
 		-g -ggdb \
 		-lboost_regex \
 		`pkg-config gtkmm-2.4 --libs` \
+		`pkg-config icu-uc icu-io --libs --cflags` \
 #
 SRCDIR=src/
 SRCS=$(wildcard $(SRCDIR)*.cpp)
