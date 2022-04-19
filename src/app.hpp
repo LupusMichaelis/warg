@@ -5,10 +5,6 @@
 
 #	include "config.hpp"
 #	include "regex.hpp"
-/*
-#	include "xml.h"
-#	include "sql.h"
-*/
 #	include "engine.hpp"
 #	include "gui.hpp"
 
@@ -27,13 +23,16 @@ namespace warg
 			static const int c_shell_err_todo;
 
 		public:
-			app();
+			app(int argc, char **argv);
 
 			virtual
 			void search() = 0;
 			
 			virtual
 			~app();
+
+			virtual
+			int run() = 0;
 
 			virtual
 			void highlight_clear() = 0;
@@ -52,6 +51,10 @@ namespace warg
 
 			virtual
 			void error_display(std::string const & msg, std::ptrdiff_t position) = 0;
+
+		protected:
+			int m_argc;
+			char ** m_argv;
 
 	} /* class app */;
 

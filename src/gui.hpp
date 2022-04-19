@@ -147,6 +147,8 @@ namespace warg
 	} /* class tree_model */;
 
 
+	class app_gtk;
+
 	class main_window
 		: public Gtk::Window
 	{
@@ -165,7 +167,7 @@ namespace warg
 			about_dialog	m_about_dlg;
 
 		public:
-			main_window();
+			main_window(app_gtk & main_app);
 
 			virtual
 			void bind_haystack(Glib::RefPtr<Gtk::TextBuffer> & p_model);

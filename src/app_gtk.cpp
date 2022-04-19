@@ -4,36 +4,48 @@
 
 namespace warg
 {
-
 	const std::string app_gtk::c_appname = BIN_NAME_GTK;
+	char const * c_appdsn = "org.lupusmic.warg";
 
 	app_gtk::~app_gtk()
 	{
 	}
 
-	app_gtk::app_gtk()
-		: app()
-		, m_window()
-		, mp_results(tree_model::create())
-		, mp_haystack(Gtk::TextBuffer::create())
-		, mp_needle(Gtk::TextBuffer::create())
-		, mp_search_engine(std::make_unique<search_plain<Glib::ustring, Gtk::TextBuffer>>())
+	app_gtk::app_gtk(int argc, char **argv)
+		: app {argc, argv}
+		, mp_window {}
+		, mp_results {}
+		, mp_haystack {}
+		, mp_needle {}
+		, mp_search_engine {}
+		, mp_app {Gtk::Application::create(c_appdsn)}
 	{
+		mp_window = std::make_unique<main_window>(*this);
 
-		m_window.set_size_request(430,330);
-		m_window.set_default_size(430,600);
-		m_window.move(120, 120);
+		mp_results = tree_model::create();
+		mp_haystack = Gtk::TextBuffer::create();
+		mp_needle = Gtk::TextBuffer::create();
+		mp_search_engine = std::make_unique<search_plain<Glib::ustring, Gtk::TextBuffer>>();
+
+		mp_window->set_size_request(430,330);
+		mp_window->set_default_size(430,600);
+		mp_window->move(120, 120);
 
 		mp_haystack->set_text("They are some people who think the answer is 42.");
 		mp_needle->set_text("(\\w+) (\\d+)");
 
-		m_window.bind_haystack(mp_haystack);
-		m_window.bind_results(mp_results);
-		m_window.bind_pattern(mp_needle);
-		m_window.signal_match().connect(sigc::mem_fun(*this, &app::search));
-		m_window.signal_choose().connect(sigc::mem_fun(*this, &app::switch_engine));
+		mp_window->bind_haystack(mp_haystack);
+		mp_window->bind_results(mp_results);
+		mp_window->bind_pattern(mp_needle);
+		mp_window->signal_match().connect(sigc::mem_fun(*this, &app::search));
+		mp_window->signal_choose().connect(sigc::mem_fun(*this, &app::switch_engine));
 
-		m_window.show_all();
+		mp_window->show_all();
+	}
+
+	int app_gtk::run()
+	{
+		return mp_app->run(*mp_window, m_argc, m_argv);
 	}
 
 	void app_gtk::search()
@@ -114,7 +126,6 @@ namespace warg
 			mp_results->append(idx, match_caption);
 		}
 
-		//m_window.set_status(Glib::ustring("Subresults ") + (mp_search_engine->has_subresults() ? "available" : "unavailable"));
 	}
 
 	void app_gtk::unstore_results()
@@ -172,7 +183,7 @@ namespace warg
 		}
 
 		mp_needle->apply_tag(p_tag, first, second);
-		m_window.set_status(msg);
+		mp_window->set_status(msg);
 	}
 
 } // namespace warg

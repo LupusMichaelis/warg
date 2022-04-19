@@ -11,7 +11,7 @@ CXXFLAGS= \
 		-I/usr/include/boost-1_37/ \
 		-Isrc/ \
 		-DGTKMM_DISABLE_DEPRECATED \
-		`pkg-config gtkmm-2.4 --cflags` \
+		`pkg-config gtkmm-3.0 --cflags` \
 		`pkg-config icu-uc icu-io --libs --cflags` \
 		-Werror \
 
@@ -19,7 +19,7 @@ LDFLAGS= \
 		-L. \
 		-g -ggdb \
 		-lboost_regex \
-		`pkg-config gtkmm-2.4 --libs` \
+		`pkg-config gtkmm-3.0 --libs` \
 		`pkg-config icu-uc icu-io --libs --cflags` \
 #
 SRCDIR=src/

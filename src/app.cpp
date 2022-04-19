@@ -24,9 +24,8 @@ namespace warg
 
 		if(app_name.cend() != std::find_end(app_name.cbegin(), app_name.cend(), std::begin(app_gtk::c_appname), std::end(app_gtk::c_appname)))
 		{
-			Gtk::Main kit(argc, argv);
-			warg::app_gtk app;
-			Gtk::Main::run(app.m_window);
+			auto p_app = std::make_unique<app_gtk>(argc, argv);
+			return p_app->run();
 		}
 		else if(app_name.cend() != std::find_end(app_name.cbegin(), app_name.cend(), std::begin(app_cli::c_appname), std::end(app_cli::c_appname)))
 			return c_shell_err_todo;
@@ -43,7 +42,9 @@ namespace warg
 		return c_shell_success;
 	}
 
-	app::app()
+	app::app(int argc, char **argv)
+		: m_argc {argc}
+		, m_argv {argv}
 	{
 	}
 

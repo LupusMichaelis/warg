@@ -21,7 +21,7 @@ namespace warg
 			std::ostream	* mp_out;
 
 		public:
-			app_cli();
+			app_cli(int argc, char *argv[]);
 
 			virtual
 			~app_cli();

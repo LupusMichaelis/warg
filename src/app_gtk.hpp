@@ -7,6 +7,7 @@
 
 namespace warg
 {
+	extern char const * c_appdsn;
 
 	class app_gtk
 		: public app
@@ -17,12 +18,10 @@ namespace warg
 			typedef app parent_t;
 			static const std::string c_appname;
 
-		protected:
-			app_gtk();
+			app_gtk(int argc, char **argv);
 
 		protected:
-			main_window m_window;
-
+			std::unique_ptr<main_window>	mp_window;
 			//warg::tree_model_cols			m_cols ; // \xxx
 			Glib::RefPtr<tree_model>		mp_results;
 			// Glib::RefPtr<Gtk::ListStore>	mp_results;
@@ -36,6 +35,9 @@ namespace warg
 		public:
 			virtual
 			~app_gtk();
+
+			virtual
+			int run();
 
 			virtual
 			void search();
@@ -60,6 +62,9 @@ namespace warg
 
 			virtual
 			void error_display(std::string const & msg, std::ptrdiff_t position);
+
+		private:
+			Glib::RefPtr<Gtk::Application> mp_app;
 
 	} /* class app_gtk */;
 

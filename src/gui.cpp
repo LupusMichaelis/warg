@@ -37,11 +37,8 @@ namespace warg
 		m_edit.set_submenu(m_menu_edit);
 		append(m_edit);
 
-		m_about.set_right_justified();
 		append(m_about);
 
-		for(auto & item: items())
-			item.set_sensitive(false);
 
 		/*
 		using namespace boost::lambda;
@@ -118,7 +115,7 @@ namespace warg
 		m_input.set_buffer(buffer);
 	}
 
-	main_window::main_window()
+	main_window::main_window(app_gtk & main_app)
 		: parent_t()
 		, m_input_frame
 			( _("Pattern")
